@@ -44,18 +44,18 @@ public class VendingMachineDaoFileImplTest {
     @After
     public void tearDown() {
     }
- /* 
+  /* 
     //test of removeVendingProduct method, of class VendingMachineDaoFileImpl
     @Test
     public void testRemoveVendingProduct() throws Exception {
-        ProductInformation Brownie = testDao.getVendingProductByName("Brownie");
-        int startStock = Integer.parseInt(Brownie.getInventoryLeft());
-        testDao.removeVendingProduct("Brownie");
+        ProductInformation gum = testDao.getVendingProductByName("gum");
+        int startStock = Integer.parseInt(gum.getInventoryLeft());
+        testDao.removeVendingProduct("gum");
         
-        int newStock = Integer.parseInt(Brownie.getInventoryLeft());
+        int newStock = Integer.parseInt(gum.getInventoryLeft());
         assertTrue(newStock == startStock);
     }
-   
+  
     //test of getAllVendingInventory method, of class VendingMachineDaoFileImpl
     @Test
     public void testGetAllVendingInventory() throws Exception{
@@ -79,7 +79,7 @@ public class VendingMachineDaoFileImplTest {
         String name = "Apple";
         ProductInformation product = new ProductInformation(name);
         product.setCost("10.00");
-        product.setInventoryLeft("100");
+        product.setInventoryLeft(100);
         
         //Add the product to the DAO
         testDao.addVendingProduct(name, product);
@@ -97,12 +97,12 @@ public class VendingMachineDaoFileImplTest {
         //create our first product 
         ProductInformation product1 = new ProductInformation("gum");
         product1.setCost("5.00");
-        product1.setInventoryLeft("50");
+        product1.setInventoryLeft(50);
         
         //create our second product
         ProductInformation product2 = new ProductInformation("skittles");
         product2.setCost("10.00");
-        product2.setInventoryLeft("20");
+        product2.setInventoryLeft(20);
         
         //add both our products to the DAO
         testDao.addVendingProduct(product1.getName(), product1);
@@ -119,34 +119,35 @@ public class VendingMachineDaoFileImplTest {
         assertTrue("The list of products should include gum.", testDao.getAllVendingInventory().contains(product1));
         assertTrue("The list of products should include skittles.", testDao.getAllVendingInventory().contains(product2));
     }
-   
-   
+    
+  
     @Test
     public void testRemoveVendingProuduct() throws Exception{
         //create two new products
         ProductInformation product1 = new ProductInformation("gum");
         product1.setCost("5.00");
-        product1.setInventoryLeft("50");
+        product1.setInventoryLeft(49);
         
         ProductInformation product2 = new ProductInformation("skittles");
         product2.setCost("10.00");
-        product2.setInventoryLeft("20");
+        product2.setInventoryLeft(20);
         
         //add both to the dao
         testDao.addVendingProduct(product1.getName(), product1);
         testDao.addVendingProduct(product2.getName(), product2);
         
+        assertTrue("The list of products should include gum.", testDao.getAllVendingInventory().contains(product1));
         //remove the first product -gum
         ProductInformation removedProduct = testDao.removeVendingProduct(product1.getName());  
         //check that the correct object was removed.
-        assertEquals("The removed product should be gum.", removedProduct, product1);
-        
+        assertEquals("The removed product should be gum.", removedProduct.getInventoryLeft(), product1.getInventoryLeft()-1);
+     //   assertEquals("The removed product should be gum.", removedProduct.getInventoryLeft(), "48");
         //get all the products
         List<ProductInformation> allProducts = testDao.getAllVendingInventory();
         
         //First check the general contents of the list
         assertNotNull("All products list should not be null", allProducts);
-        assertEquals("All products should only have 1 products", 1, allProducts.size());
+        assertEquals("All products should only have 2 products", 2, allProducts.size());
         
         //then the specifics
         assertFalse("The list of products should NOT include gum.", allProducts.contains(product1));
@@ -155,21 +156,21 @@ public class VendingMachineDaoFileImplTest {
         //removed the second product
         removedProduct = testDao.removeVendingProduct(product2.getName());
         //check that the correct object was removed.
-        assertEquals("The removed product should be skittles.", removedProduct, product2);
+        assertEquals("The removed product should be skittles.", removedProduct.getInventoryLeft(), product2.getInventoryLeft()-1);
         
         //retrieve all of the products again, and check the list.
         allProducts = testDao.getAllVendingInventory();
         
-        //check the contents of the list - it should be empty
-        assertTrue("The retrieved list of products should be empty", allProducts.isEmpty());
+        //check the contents of the list - it should not be empty
+        assertTrue("The retrieved list of products should not be empty", allProducts.isEmpty() == false);
         
         //try to 'get' both products by their old name - they should be nulll
         ProductInformation retrievedProduct = testDao.getVendingProductByName(product1.getName());
-        assertNull("gum was removed, should be null.", retrievedProduct);
+        assertNotNull("gum wasn't removed, shouldn't be null.", retrievedProduct);
         
         retrievedProduct = testDao.getVendingProductByName(product2.getName());
-        assertNull("skittles was removed, should be null.", retrievedProduct);
-    }
+        assertNotNull("skittles wasn't removed, shouldn't be null.", retrievedProduct);
+    } 
 
     
    

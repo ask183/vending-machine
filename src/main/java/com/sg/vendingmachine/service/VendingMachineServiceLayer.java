@@ -37,7 +37,8 @@ public class VendingMachineServiceLayer {
     
     public void checkForVendingProduct(String vendingItemName) throws VendingMachinePersistenceException, NoItemInventoryException{
         
-        if (dao.getVendingProductByName(vendingItemName).getInventoryLeft().equals("0")){
+      //if (dao.getVendingProductByName(vendingItemName).getInventoryLeft().equals("0")){
+        if (dao.getVendingProductByName(vendingItemName).getInventoryLeft() == 0){
             throw new NoItemInventoryException(vendingItemName + " is all sold out");
         }   
      //   return dao.getVendingProductByName(vendingItemName);

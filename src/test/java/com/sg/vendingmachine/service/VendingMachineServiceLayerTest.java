@@ -58,14 +58,14 @@ public class VendingMachineServiceLayerTest {
     public void testCheckForVendingProduct() throws Exception{
      /*   assertFalse(dao.getVendingProductByName("Chips").getInventoryLeft().equals("0")); */
      //Arrange
-     ProductInformation lonelyProduct = new ProductInformation("Coke");
-     lonelyProduct.setCost("2.50");
-     lonelyProduct.setInventoryLeft("29");
+     ProductInformation lonelyProduct = new ProductInformation("gum");
+     lonelyProduct.setCost("5.00");
+     lonelyProduct.setInventoryLeft(49);
      
      //act and assert 
-     ProductInformation shouldBeLonely = dao.getVendingProductByName("Coke");
+     ProductInformation shouldBeLonely = dao.getVendingProductByName("gum");
      assertNotNull("Being lonely is valid", shouldBeLonely);
-     assertEquals("I'm lonely should not have to prove it", shouldBeLonely, lonelyProduct);
+     assertEquals("I'm lonely should not have to prove it", shouldBeLonely.getInventoryLeft(), lonelyProduct.getInventoryLeft()-1);
      
      
     }
@@ -73,9 +73,9 @@ public class VendingMachineServiceLayerTest {
     //test of checkForEnoughVendingFunds method, of class VendingMachineServiceLayer
     @Test
     public void testCheckForEnoughVendingFunds() throws Exception{
-        String itemsCost = dao.getVendingProductByName("Cookies").getCost();
+        String itemsCost = dao.getVendingProductByName("gum").getCost();
         BigDecimal vendingProductCost = new BigDecimal(itemsCost);
-        BigDecimal initialVendingFunds = new BigDecimal("1.00");
+        BigDecimal initialVendingFunds = new BigDecimal("5.00");
         //Big Decimal form for initialVendingFunds<vendingProductCost
         assertFalse(initialVendingFunds.compareTo(vendingProductCost) == 1);
     }
@@ -83,16 +83,16 @@ public class VendingMachineServiceLayerTest {
     //test of vendingItemCostInString method, of class VendingMachineServiceLayer
     @Test
     public void testVendingItemCostInString() throws Exception{
-        ProductInformation pi = dao.getVendingProductByName("Doritos");
+        ProductInformation pi = dao.getVendingProductByName("gum");
         
-        assertEquals(pi.getCost(), "1.25");
+        assertEquals(pi.getCost(), "5.00");
     }
     
     //test of getTheExactChangeAmountInBigDecimal method, of class VendingMachineServiceLayer
     @Test
     public void testGetTheExactChangeAmountInBigDecimal() throws Exception{
-        String vendingItemName = "Brownie";
-        String initialAmount = "3";
+        String vendingItemName = "gum";
+        String initialAmount = "10";
         
         ProductInformation currentProductInfo = dao.getVendingProductByName(vendingItemName);
         String cost = currentProductInfo.getCost();
@@ -102,7 +102,7 @@ public class VendingMachineServiceLayerTest {
         
         BigDecimal change = initialVendingFunds.subtract(vendingProductCost);
         
-        assertEquals(change, new BigDecimal("1.50"));
+        assertEquals(change, new BigDecimal("5.00"));
     }
     
     //test of getChangeInDenomination method, of class VendingMachineServiceLayer

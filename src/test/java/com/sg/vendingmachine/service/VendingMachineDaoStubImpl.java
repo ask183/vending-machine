@@ -27,7 +27,7 @@ public class VendingMachineDaoStubImpl implements VendingMachineDao {
         lonelyProduct = new ProductInformation("Coke");
       //  lonelyProduct.setName("Coke");
         lonelyProduct.setCost("2.00");
-        lonelyProduct.setInventoryLeft("100");
+        lonelyProduct.setInventoryLeft(100);
     }
 
     @Override

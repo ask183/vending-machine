@@ -14,7 +14,7 @@ public class ProductInformation {
     
     private String name;
     private String cost;
-    private String inventoryLeft;
+    private int inventoryLeft;
 
     public ProductInformation(String name) {
         this.name = name;
@@ -36,11 +36,11 @@ public class ProductInformation {
         this.cost = cost;
     }
 
-    public String getInventoryLeft() {
+    public int getInventoryLeft() {
         return inventoryLeft;
     }
 
-    public void setInventoryLeft(String inventoryLeft) {
+    public void setInventoryLeft(int inventoryLeft) {
         this.inventoryLeft = inventoryLeft;
     }
 

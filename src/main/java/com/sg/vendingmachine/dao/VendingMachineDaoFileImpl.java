@@ -75,12 +75,15 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         getAllVendingInventory(); 
 
         ProductInformation currentProductInfo = inventory.get(vendingItemName);
-        int currentStock = Integer.parseInt(currentProductInfo.getInventoryLeft());
+    //    int currentStock = Integer.parseInt(currentProductInfo.getInventoryLeft());
+        int currentStock = currentProductInfo.getInventoryLeft();
         int newStock = currentStock - 1;
-        currentProductInfo.setInventoryLeft(Integer.toString(newStock));
+     //   currentProductInfo.setInventoryLeft(Integer.toString(newStock));
+        currentProductInfo.setInventoryLeft(newStock);
 
         writeFile();
-        return null; 
+  //      return null;
+        return currentProductInfo;
     }  
     
     private String marshallProductInfo(ProductInformation aProductInfo) {
@@ -98,7 +101,8 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         ProductInformation vendingProductFromFile = new ProductInformation(name);
 
         vendingProductFromFile.setCost(productInfoTokens[1]);
-        vendingProductFromFile.setInventoryLeft(productInfoTokens[2]);
+     //   vendingProductFromFile.setInventoryLeft(productInfoTokens[2]);
+        vendingProductFromFile.setInventoryLeft(Integer.parseInt(productInfoTokens[2]));
 
         return vendingProductFromFile;
     }

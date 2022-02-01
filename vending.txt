@@ -1,5 +1,5 @@
 Snickers::1.25::3
-Brownie::1.50::16
+Brownie::1.50::15
 Chips::1.00::3
 Cookies::1.50::4
-Doritos::1.25::21
+Doritos::1.25::18

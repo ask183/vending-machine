@@ -22,6 +22,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class App {
     public static void main(String[] args){
+   /*
     UserIO myIo = new UserIOConsoleImpl();
     VendingMachineView myView = new VendingMachineView(myIo);
     VendingMachineDao myDao = new VendingMachineDaoFileImpl();
@@ -29,12 +30,12 @@ public class App {
     VendingMachineAuditDao myAudit = new VendingMachineAuditDaoFileImpl();
     VendingMachineServiceLayer myService = new VendingMachineServiceLayer(myDao, myAudit);
     VendingMachineController controller = new VendingMachineController(myView, myService);
-        controller.run(); 
-   /*
+        controller.run(); */
+   
         ApplicationContext appContext
                 = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 
         VendingMachineController controller = appContext.getBean("controller", VendingMachineController.class);
-        controller.run();   */
+        controller.run();   
     }
 }   
