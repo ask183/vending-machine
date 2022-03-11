@@ -144,7 +144,8 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao {
         String productInfoAsText;
         List<ProductInformation> productInfoList = this.getAllVendingInventory();
 
-        for (ProductInformation currentProductInfo : productInfoList) {
+       
+         for(ProductInformation currentProductInfo : productInfoList) {
             productInfoAsText = marshallProductInfo(currentProductInfo);
             out.println(productInfoAsText);
             out.flush(); //flush is to stream so whatever is in the buffer make sure that line gets printed to the stream
